@@ -11,8 +11,9 @@
   <title>Bare - Start Bootstrap Template</title>
 
   <!-- Bootstrap core CSS -->
-  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+  <link href="/public/vendor/bootstrap/css/bootstrap.css.map" rel="stylesheet" id="bootstrap-css">
+
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
   <link href="/public/vendor/bootstrap/css/custom.css" rel="stylesheet" id="bootstrap-css">
 
@@ -23,3 +24,38 @@
 
 
 <body>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <div id="flipkart-navbar">
+      <div class="container">
+       
+        <div class="row row2">
+          <div class="col-sm-2">
+            <h2 style="margin:0px;">
+              <span class="smallnav menu" onclick="openNav()">☰ gesTool</span>
+            </h2>
+            <h1 style="margin:0px;">
+              <span class="largenav">gesTool</span>
+            </h1>
+            
+          </div>
+       
+              <ul class="largenav pull-right">
+                  <li class="upper-links"><a class="links" href="/">Overview</a></li>
+                  <li class="upper-links"><a class="links" href="/activities">Actividades</a></li>
+              
+              </ul>
+        
+        </div>
+        
+      </div>
+    </div>
+    <div id="mySidenav" class="sidenav">
+      <div class="container" style="background-color: #2874f0; padding-top: 10px;">
+        <span class="sidenav-heading">Home</span>
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+      </div>
+    
+      <a href="http://clashhacks.in/">Overview</a>
+      <a href="http://clashhacks.in/">Actividades</a>
+    </div>
+  
