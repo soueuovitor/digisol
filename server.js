@@ -72,7 +72,7 @@ app.set('view engine', 'ejs');
 app.set('views', 'views');
 
 global.connection = mysql.createConnection({
-	host: 'localhost:3306',
+	host: 'localhost',
 	user: 'root',
 	password: 'Ilikepotatoes',
 	database: 'mydb'
