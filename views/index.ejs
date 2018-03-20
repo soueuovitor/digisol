@@ -1,8 +1,5 @@
 <% include partials/header %>
-    <div id="floating-button" data-toggle="modal" data-target="#login-modal" data-original-title="Create">
-      <p class="plus">+</p>
-      <img class="edit" src="https://ssl.gstatic.com/bt/C3341AA7A1A076756462EE2E5CD71C11/1x/bt_compose2_1x.png">
-    </div>
+
     <!-- Page Content -->
     <div class="content-card">
       <div class="cards" >
@@ -80,6 +77,29 @@
 
       </div>
     </div>
-<% include partials/new_act.ejs %>
+
+
+    <script>
+    var ctx = document.getElementById('donut-lucro').getContext('2d');
+var chart = new Chart(ctx, {
+    // The type of chart we want to create
+    type: 'line',
+
+    // The data for our dataset
+    data: {
+        labels: ["January", "February", "March", "April", "May", "June", "July"],
+        datasets: [{
+            label: "My First dataset",
+            backgroundColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: [0, 10, 5, 2, 20, 30, 45],
+        }]
+    },
+
+    // Configuration options go here
+    options: {}
+});
+
+    </script>
 
 <% include partials/footer.ejs %>

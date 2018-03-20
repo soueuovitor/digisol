@@ -64,7 +64,6 @@ passport.serializeUser(function (username, callback) {
 passport.deserializeUser(function (username, callback) {
 	userModel.read(username, function (data) {
 		callback(null, data);
-	})
 });
 //end of new
 */
@@ -72,10 +71,10 @@ app.set('view engine', 'ejs');
 app.set('views', 'views');
 
 global.connection = mysql.createConnection({
-	host: 'localhost',
-	user: 'root',
-	password: 'Ilikepotatoes',
-	database: 'mydb'
+	host: 'd4w.pt',
+	user: 'dwpt',
+	password: 'Rumoao9.5',
+	database: 'dwpt_test'
 }).on('enqueue', function (sequence) {
 	if ('Query' === sequence.constructor.name) {
 		console.log(sequence.sql);
@@ -103,7 +102,6 @@ app.use(function(request, response, next){
 
 app.use('/', require('./controllers/index.route'));
 app.use('/activities', require('./controllers/activities.route'));
-
 app.use('/public', express.static('public'));
 
 //new

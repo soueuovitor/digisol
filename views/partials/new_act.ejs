@@ -1,4 +1,4 @@
-<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+<div class="modal fade" id="iniciar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
     <div class="modal-dialog">
         <div class="modal-content">
 
@@ -25,13 +25,32 @@
                         </div>
 
                         <div class="form-group">
-                            <select class="selectpicker">
-                                <option>Mustard</option>
-                                <option>Ketchup</option>
-                                <option>Relish</option>
+                            <select class="form-control button" id="sortPrice" style="float:right">
+                                <option>Cliente</option>
+                                <% for (var c of clients) { %>
+                                    <option value="<%= c.id_cliente %>">
+                                        <%= c.nome_cliente%>
+                                    </option>
+                                    <%}%>
                             </select>
 
                         </div>
+
+
+                        <div class="form-group">
+                            <select class="form-control button" id="sortPrice" style="float:right">
+                                <option>users</option>
+                                <% for (var u of users) { %>
+                                    <option value="<%= u.id_utilizador %>">
+                                        <%= u.nome_utilizador %>
+                                    </option>
+                                    <%}%>
+                            </select>
+
+                        </div>
+
+
+
 
                         <div class="form-group">
                             <label for="exampleInputEmail1">Email address</label>
@@ -39,6 +58,91 @@
                             <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                         </div>
 
+
+                    </div>
+                    <div class="modal-footer">
+                        <div>
+                            <button type="submit" class="btn btn-primary btn-lg btn-block">Registar</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+<div class="modal fade" id="new-to-do" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header" align="center">
+
+
+
+
+            </div>
+
+            <!-- Begin # DIV Form -->
+            <div id="div-forms">
+
+
+                <!-- Begin | Register Form -->
+                <form id="new-todo">
+
+                    <div class="modal-body">
+
+                        <div id="div-voluntario-msg">
+                            <center>
+                                <span id="text-voluntario-msg">Nova Atividade</span>
+                            </center>
+                        </div>
+
+                        <div class="form-group">
+                            <select class="form-control button" id="client" name="cliente" style="float:right">
+                                <option>Cliente</option>
+                                <% for (var c of clients) { %>
+                                    <option value="<%= c.id_cliente %>">
+                                        <%= c.nome_cliente%>
+                                    </option>
+                                    <%}%>
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group">
+                            <select class="form-control button" id="user" name="user" style="float:right">
+                                <option>users</option>
+                                <% for (var u of users) { %>
+                                    <option value="<%= u.id_utilizador %>">
+                                        <%= u.nome_utilizador %>
+                                    </option>
+                                    <%}%>
+                            </select>
+
+                        </div>
+
+
+
+
+                        <div class="form-group">
+                            <label for="titulo">Título</label>
+                            <input type="text" name="titulo" class="form-control" id="titulo" placeholder="Título">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="titulo">Descrição</label>
+                            <textarea rows="4" name="descricao" cols="5" class="form-control" id="descricao" placeholder="Descrição"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="titulo">Tipo</label>
+                            <input type="text" name="tipo" class="form-control" id="tipo" placeholder="Tipo">
+                        </div>
 
                     </div>
                     <div class="modal-footer">

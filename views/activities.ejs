@@ -2,7 +2,12 @@
   <% include partials/new_act.ejs %>
 
 
+    <style>
+      .to-do-card {
+        background-color: #eeeeef;
 
+      }
+    </style>
     <div id="floating-button" data-toggle="modal" data-target="#login-modal" data-original-title="Create">
       <p class="plus">+</p>
       <img class="edit" src="https://ssl.gstatic.com/bt/C3341AA7A1A076756462EE2E5CD71C11/1x/bt_compose2_1x.png">
@@ -10,10 +15,157 @@
     <!-- Page Content -->
     <div class="content-card">
       <div class="cards">
-        
+
+        <div class="col-md-4">
 
 
+          <!-- DONUT CHART -->
+          <div class="box box-act" id="todo" style=" overflow:hidden" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <div class="box-header">
+              <h3 class="box-title">To-Do</h3>
+
+              <div class="box-tools pull-right">
+
+                <button class="btn btn-box-tool" data-toggle="modal" data-target="#new-to-do">
+                  <i class="fa fa-plus fa-lg" aria-hidden="true"></i>
+
+                </button>
+              </div>
+            </div>
+            <%for (var a of activities) { %>
+              <% if (a.hora_inicio == '0000-00-00 00:00:00') { %>
+              <div class="to-do-card box-todo " id="<%= a.id_actividade %>" draggable="true" ondragstart="drag(event)">
+                <h4 class="todo-title">
+                  <%= a.nome_actividade %>
+                </h4>
+                <br>
+                <p class="box-p">
+                  <%= a.descricao %>
+                </p>
+              </div>
+              <% } %>   
+              <% } %>
+          </div>
+          <!-- /.box-body -->
+        </div>
+        <div class="col-md-4">
+
+
+          <!-- DONUT CHART -->
+          <div class="box box-act" style=" overflow:hidden" id="iniciado" ondrop="dropInicio(event)" ondragover="allowDrop(event)">
+            <div class="box-header">
+              <h3 class="box-title">Iniciado</h3>
+
+              <div class="box-tools pull-right">
+
+
+
+                <a class="btn btn-box-tool" data-toggle="modal" data-target="#iniciar">
+                  <i class="fa fa-plus fa-lg" aria-hidden="true"></i>
+
+                </a>
+              </div>
+            </div>
+            <%for (var a of activities) { %>
+              <% if (a.hora_inicio != '0000-00-00 00:00:00' && a.hora_fim == '0000-00-00 00:00:00')  { %>
+              <div class="to-do-card box-todo " id="<%= a.id_actividade %>" draggable="true" ondragstart="drag(event)">
+                <h4 class="todo-title">
+                  <%= a.nome_actividade %>
+                </h4>
+                <br>
+                <p class="box-p">
+                  Iniciado em: <%= a.hora_inicio.toLocaleTimeString() %>
+                </p>
+                <p class="box-p">
+                  <%= a.descricao %>
+                </p>
+              </div>
+              <% } %>   
+              <% } %>
+          </div>
+          <!-- /.box-body -->
+        </div>
+        <div class="col-md-4">
+
+
+          <!-- DONUT CHART -->
+          <div class="box box-act" id="acabado" style="overflow:hidden" ondrop="dropFim(event,'<%= a.hora_inicio %>')" ondragover="allowDrop(event)">
+            <div class="box-header">
+              <h3 class="box-title">Acabado</h3>
+
+              <div class="box-tools pull-right">
+
+                <a class="btn btn-box-tool" onclick="alterPatrocinador('/alterPatrocinador')">
+                  <i class="fa fa-plus fa-lg" aria-hidden="true"></i>
+
+                </a>
+              </div>
+            </div>
+            <%for (var a of activities) { %>
+              <% if (a.hora_inicio != '0000-00-00 00:00:00' && a.hora_fim != '0000-00-00 00:00:00')  { %>
+              <div class="to-do-card box-todo " id="<%= a.id_actividade %>" draggable="true" ondragstart="drag(event)">
+                <h4 class="todo-title">
+                  <%= a.nome_actividade %>
+                </h4>
+                <br>
+                <p class="box-p">
+                  <%= a.descricao %>
+                </p>
+              </div>
+              <% } %>   
+              <% } %>
+          </div>
+          <!-- /.box-body -->
+        </div>
       </div>
     </div>
+    <script>
+      function allowDrop(ev) {
+        ev.preventDefault();
+      }
 
+      function drag(ev) {
+        ev.dataTransfer.setData("text", ev.target.id);
+      }
+
+      function drop(ev) {
+        ev.preventDefault();
+        var data = ev.dataTransfer.getData("text");
+        ev.target.appendChild(document.getElementById(data));
+
+          $.post("activities/restart", {
+          id: data
+  
+        });
+      }
+
+      function dropInicio(ev) {
+        ev.preventDefault();
+        var data = ev.dataTransfer.getData("text");
+
+        ev.target.appendChild(document.getElementById(data));
+        var d = new Date().toISOString().slice(0, 19).replace('T', ' ');
+
+
+        $.post("activities/inicio", {
+          id: data,
+          time: d
+        });
+      }
+      function dropFim(ev, horaInicio) {
+        ev.preventDefault();
+        var data = ev.dataTransfer.getData("text");
+
+        ev.target.appendChild(document.getElementById(data));
+        var d = new Date().toISOString().slice(0, 19).replace('T', ' ');
+
+      
+        $.post("activities/fim", {
+          id: data,
+          timeEnd: d,
+          timeStart: horaInicio
+
+        });
+      }
+    </script>
     <% include partials/footer.ejs %>
