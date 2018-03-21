@@ -40,9 +40,9 @@ module.exports = {
 
 	},
 	fimAct(data,callback){
-		var sql = "UPDATE actividades SET hora_fim=? WHERE id_actividade=?";
+		var sql = "UPDATE actividades SET hora_fim=? ,duracao=? WHERE id_actividade=?";
 		global.connection.query(
-			sql, [data.time, data.id],
+			sql, [data.time, data.duration, data.id],
 			function (error, rows, fields) {
 				if (error) throw error;
 				callback(rows[0]);

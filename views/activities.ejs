@@ -34,17 +34,20 @@
             </div>
             <%for (var a of activities) { %>
               <% if (a.hora_inicio == '0000-00-00 00:00:00') { %>
-              <div class="to-do-card box-todo " id="<%= a.id_actividade %>" draggable="true" ondragstart="drag(event)">
-                <h4 class="todo-title">
-                  <%= a.nome_actividade %>
-                </h4>
-                <br>
-                <p class="box-p">
-                  <%= a.descricao %>
-                </p>
-              </div>
-              <% } %>   
-              <% } %>
+                <div class="to-do-card box-todo " id="<%= a.id_actividade %>" draggable="true" ondragstart="drag(event)">
+                  <div class="header">
+
+                    <h4 class="todo-title">
+                      <%= a.nome_actividade %>
+                    </h4>
+                  </div>
+                  <br>
+                  <p class="box-p">
+                    <%= a.descricao %>
+                  </p>
+                </div>
+                <% } %>
+                  <% } %>
           </div>
           <!-- /.box-body -->
         </div>
@@ -68,20 +71,24 @@
             </div>
             <%for (var a of activities) { %>
               <% if (a.hora_inicio != '0000-00-00 00:00:00' && a.hora_fim == '0000-00-00 00:00:00')  { %>
-              <div class="to-do-card box-todo " id="<%= a.id_actividade %>" draggable="true" ondragstart="drag(event)">
-                <h4 class="todo-title">
-                  <%= a.nome_actividade %>
-                </h4>
-                <br>
-                <p class="box-p">
-                  Iniciado em: <%= a.hora_inicio.toLocaleTimeString() %>
-                </p>
-                <p class="box-p">
-                  <%= a.descricao %>
-                </p>
-              </div>
-              <% } %>   
-              <% } %>
+                <div class="to-do-card box-todo " id="<%= a.id_actividade %>" draggable="true" ondragstart="drag(event)">
+                  <div class="header">
+                    <h4 class="todo-title">
+                      <%= a.nome_actividade %>
+                    </h4>
+                  </div>
+
+                  <br>
+                  <p class="box-p">
+                    Iniciado em:
+                    <%= a.hora_inicio.toLocaleTimeString() %>
+                  </p>
+                  <p class="box-p">
+                    <%= a.descricao %>
+                  </p>
+                </div>
+                <% } %>
+                  <% } %>
           </div>
           <!-- /.box-body -->
         </div>
@@ -103,17 +110,22 @@
             </div>
             <%for (var a of activities) { %>
               <% if (a.hora_inicio != '0000-00-00 00:00:00' && a.hora_fim != '0000-00-00 00:00:00')  { %>
-              <div class="to-do-card box-todo " id="<%= a.id_actividade %>" draggable="true" ondragstart="drag(event)">
-                <h4 class="todo-title">
-                  <%= a.nome_actividade %>
-                </h4>
-                <br>
-                <p class="box-p">
-                  <%= a.descricao %>
-                </p>
-              </div>
-              <% } %>   
-              <% } %>
+                <div class="to-do-card box-todo " id="<%= a.id_actividade %>" draggable="true" ondragstart="drag(event)">
+                  <h4 class="todo-title">
+                    <%= a.nome_actividade %>
+                  </h4>
+                  <br>
+                  <br>
+                  <p class="box-p">
+                    Duração:
+                    <%= a.duracao %>
+                  </p>
+                  <p class="box-p">
+                    <%= a.descricao %>
+                  </p>
+                </div>
+                <% } %>
+                  <% } %>
           </div>
           <!-- /.box-body -->
         </div>
@@ -133,18 +145,23 @@
         var data = ev.dataTransfer.getData("text");
         ev.target.appendChild(document.getElementById(data));
 
-          $.post("activities/restart", {
+        $.post("activities/restart", {
           id: data
-  
+
         });
       }
 
       function dropInicio(ev) {
         ev.preventDefault();
         var data = ev.dataTransfer.getData("text");
+        var droped = document.getElementById(data);
 
-        ev.target.appendChild(document.getElementById(data));
+
         var d = new Date().toISOString().slice(0, 19).replace('T', ' ');
+
+        var textnode = document.createTextNode("Water");
+        droped.innerHTML = '<p>Iniciado em:'+ d +'</p>' + droped.innerHTML;
+        ev.target.appendChild(document.getElementById(data));
 
 
         $.post("activities/inicio", {
@@ -152,6 +169,7 @@
           time: d
         });
       }
+
       function dropFim(ev, horaInicio) {
         ev.preventDefault();
         var data = ev.dataTransfer.getData("text");
@@ -159,7 +177,7 @@
         ev.target.appendChild(document.getElementById(data));
         var d = new Date().toISOString().slice(0, 19).replace('T', ' ');
 
-      
+
         $.post("activities/fim", {
           id: data,
           timeEnd: d,

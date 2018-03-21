@@ -24,24 +24,37 @@ router.get('/', function (request, response) {
 
 router.post('/fim', function(request, response){
 
+	Number.prototype.toTime = function(isSec) {
+		var ms = isSec ? this * 1e3 : this,
+			lm = ~(4 * !!isSec),  /* limit fraction */
+			fmt = new Date(ms).toISOString().slice(11, lm);
+	
+		if (ms >= 8.64e7) {  /* >= 24 hours */
+			var parts = fmt.split(/:(?=\d{2}:)/);
+			parts[0] -= -24 * (ms / 8.64e7 | 0);
+			return parts.join(':');
+		}
+	
+		return fmt;
+	};
+	var horaInicio = new Date(request.body.timeStart).getTime();
 
-	var t = request.body.timeStart.split(/[- :]/);
-	var horaInicio = new Date(Date.UTC(t[0], t[1]-1, t[2], t[3], t[4], t[5]));
 
 // Apply each element to the Date function
-	var fim = request.body.timeEnd.split(/[- :]/);
-	var horaFim = new Date(Date.UTC(fim[0], fim[1]-1, fim[2],fim[3], fim[4], fim[5]));
+	var horaFim = new Date(request.body.timeEnd).getTime();
 
-	var seconds = (horaFim.getTime() - horaInicio.getTime()) / 1000;
+	var seconds = (horaFim - horaInicio) / 1000;
 
-	console.log(seconds + ' '+ horaFim)
+	console.log(seconds);
+var duracao = (seconds .toTime(true))
+console.log(duracao);
 
 	var data = {
 
 		'id': request.body.id,
 
-		'time': request.body.timeEnd
-	
+		'time': request.body.timeEnd,
+		'duration': duracao
 	};
 
 
