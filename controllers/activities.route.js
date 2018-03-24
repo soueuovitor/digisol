@@ -23,6 +23,49 @@ router.get('/', function (request, response) {
 });
 
 router.post('/fim', function(request, response){
+/*
+	Number.prototype.toTime = function(isSec) {
+		var ms = isSec ? this * 1e3 : this,
+			lm = ~(4 * !!isSec),  
+			fmt = new Date(ms).toISOString().slice(11, lm);
+	
+		if (ms >= 8.64e7) {  
+			var parts = fmt.split(/:(?=\d{2}:)/);
+			parts[0] -= -24 * (ms / 8.64e7 | 0);
+			return parts.join(':');
+		}
+	
+		return fmt;
+	};
+
+	var horaInicio = new Date(request.body.timeStart).getTime();
+
+
+// Apply each element to the Date function
+	var horaFim = new Date(request.body.timeEnd).getTime();
+
+	var seconds = (horaFim - horaInicio) / 1000;
+
+	console.log(seconds);
+var duracao = (seconds .toTime(true))
+console.log(duracao);
+*/
+	var data = {
+
+		'id': request.body.id,
+
+		'time': request.body.timeEnd,
+	};
+
+
+	model.fimAct(data, function () {});
+
+
+
+
+});
+
+router.post('/increment', function(request, response){
 
 	Number.prototype.toTime = function(isSec) {
 		var ms = isSec ? this * 1e3 : this,
@@ -37,11 +80,11 @@ router.post('/fim', function(request, response){
 	
 		return fmt;
 	};
-	var horaInicio = new Date(request.body.timeStart).getTime();
+	var horaInicio = new Date(request.body.start).getTime();
 
 
 // Apply each element to the Date function
-	var horaFim = new Date(request.body.timeEnd).getTime();
+	var horaFim = new Date(request.body.end).getTime();
 
 	var seconds = (horaFim - horaInicio) / 1000;
 
@@ -52,13 +95,13 @@ console.log(duracao);
 	var data = {
 
 		'id': request.body.id,
-
-		'time': request.body.timeEnd,
+		'start': request.body.start,
+		'end': request.body.end,
 		'duration': duracao
 	};
 
 
-	model.fimAct(data, function () {});
+	model.increment(data, function () {});
 
 
 

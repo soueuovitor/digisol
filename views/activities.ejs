@@ -73,8 +73,14 @@
               <% if (a.hora_inicio != '0000-00-00 00:00:00' && a.hora_fim == '0000-00-00 00:00:00')  { %>
                 <div class="to-do-card box-todo " id="<%= a.id_actividade %>" draggable="true" ondragstart="drag(event)">
                   <div class="header">
+
                     <h4 class="todo-title">
+
                       <%= a.nome_actividade %>
+                        <a class="btn btn-box-tool" id="<%= a.id_actividade %>watch" onclick="start('<%= a.id_actividade %>watch')">
+                          <i class="fas fa-play fa-lg" aria-hidden="true"></i>
+
+                        </a>
                     </h4>
                   </div>
 
@@ -132,6 +138,37 @@
       </div>
     </div>
     <script>
+      function start(id) {
+
+        var start = new Date().toISOString().slice(0, 19).replace('T', ' ');
+
+        $('#' + id).replaceWith('<a class="btn btn-box-tool" id="' + id+
+          '"onclick="stop('+"'"+id+"'"+","+"'"+start+"'"+')"><i class="fas fa-stop fa-lg" aria-hidden="true"></i></a>')
+
+      
+
+        return start;
+
+      }
+
+      function stop(id, startTime) {
+      
+        var end = new Date().toISOString().slice(0, 19).replace('T', ' ');
+
+        $('#' + id).replaceWith('<a class="btn btn-box-tool" id="' + id +
+          '"onclick="start(id)"><i class="fas fa-play fa-lg" aria-hidden="true"></i></a>')
+
+
+
+
+        $.post("activities/increment", {
+          id: id,
+          start: startTime,
+          end: end
+        });
+      }
+
+
       function allowDrop(ev) {
         ev.preventDefault();
       }
@@ -160,7 +197,7 @@
         var d = new Date().toISOString().slice(0, 19).replace('T', ' ');
 
         var textnode = document.createTextNode("Water");
-        droped.innerHTML = '<p>Iniciado em:'+ d +'</p>' + droped.innerHTML;
+        droped.innerHTML = '<p>Iniciado em:' + d + '</p>' + droped.innerHTML;
         ev.target.appendChild(document.getElementById(data));
 
 
