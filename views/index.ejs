@@ -16,7 +16,7 @@
               </div>
             </div>
 
-            <canvas id="donut-lucro"></canvas>
+            <div id='columnchart_material' style="height: 95%"></div>
           </div>
           <!-- /.box-body -->
         </div>
@@ -51,7 +51,7 @@
               </div>
             </div>
 
-            <canvas id="donut-lucro"></canvas>
+            <div id='columnchart_material'></div>
           </div>
           <!-- /.box-body -->
         </div>
@@ -80,6 +80,57 @@
 
 
     <script>
+
+
+  
+
+ google.charts.load('current', {'packages':['bar']});
+      google.charts.setOnLoadCallback(drawChart);
+
+
+
+      function drawChart() {
+
+	
+ var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Time of Day');
+      data.addColumn('timeofday', 'Horas Diárias');
+
+      data.addColumn('timeofday', 'Horas Reais');
+data.addRows([
+
+	  <% for (var e of graphUsers){ %>
+		
+		["<%= e.user %>", [<%= e.horas %>],[ <%= e.reais %>]] ,
+	<% } %>
+]);
+
+        var options = {
+          chart: {
+            title: 'Hours Worked by worker',
+          }
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+      }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     var ctx = document.getElementById('donut-lucro').getContext('2d');
 var chart = new Chart(ctx, {
     // The type of chart we want to create

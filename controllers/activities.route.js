@@ -5,6 +5,7 @@ router.get('/', function (request, response) {
 	//console.log(request.isAuthenticated());
 
 	model.listClientes(function (clients) {
+		model.listTipos(function (tipos) {
 
 		model.listUsers(function (users) {
 			model.listActividades(function (activities) {
@@ -13,8 +14,10 @@ router.get('/', function (request, response) {
 			response.render('./activities', {
 				clients: clients,
 				users: users,
-				activities : activities
+				activities : activities,
+				tipos : tipos
 			})
+		})
 		})
 	})
 
@@ -155,7 +158,8 @@ router.post('/newToDo', function(request, response){
 		'user': request.body.user,
 		'titulo': request.body.titulo,
 		'descricao': request.body.descricao,
-		'tipo': request.body.tipo
+		'tipo': request.body.tipo,
+		'sub': request.body.subtipo
 	};
 	model.createToDo(data, function () {});
 

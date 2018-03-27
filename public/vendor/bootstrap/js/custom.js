@@ -25,7 +25,6 @@ $(function () {
             case "new-todo":
                 
 
-                window.alert("shit")
                     $.ajax({
                         url: '/activities/newToDo',
                         method: "POST",
@@ -47,7 +46,7 @@ $(function () {
 
                             } else {
 
-                                window.location = '/sessoes';
+                                window.location = '/activities';
 
 
 

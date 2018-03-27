@@ -10,6 +10,14 @@ module.exports = {
 			callback(rows);
 
 		});
+	},
+	listTipos(callback) {
+		var sql = 'SELECT * from tipo';
+		global.connection.query(sql, function (error, rows, fields) {
+			if (error) throw error;
+			callback(rows);
+
+		});
     },
 	listActividades(callback) {
 		var sql = 'SELECT * from actividades';
@@ -77,9 +85,9 @@ module.exports = {
 
 	},
 	createToDo(data, callback){
-		var sql = "INSERT INTO actividades (nome_actividade, id_cliente_fk, id_utilizador, descricao,tipo) VALUES (?,?,?,?,?)";
+		var sql = "INSERT INTO actividades (nome_actividade, id_cliente_fk, id_utilizador, descricao,tipo,subtipo) VALUES (?,?,?,?,?,?)";
 		global.connection.query(
-			sql, [data.titulo, data.cliente, data.user, data.descricao, data.tipo],
+			sql, [data.titulo, data.cliente, data.user, data.descricao, data.tipo, data.sub],
 			function (error, rows, fields) {
 				if (error) throw error;
 				callback(rows[0]);

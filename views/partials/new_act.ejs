@@ -126,8 +126,25 @@
 
                         </div>
 
+                        <div class="form-group">
+                            <select class="form-control button" id="tipo" name="tipo" style="float:right">
+                                <option>Tipo</option>
+                                <% for (var t of tipos) { %>
+                                    <option value="<%= t.nome %>">
+                                        <%= t.nome %>
+                                    </option>
+                                    <%}%>
+                            </select>
+
+                        </div>
 
 
+
+
+                        <div class="form-group">
+                            <label for="titulo">Sub-tipo</label>
+                            <input type="text" name="subtipo" class="form-control" id="subtipo" placeholder="Sub-tipo">
+                        </div>
 
                         <div class="form-group">
                             <label for="titulo">Título</label>
@@ -139,11 +156,7 @@
                             <textarea rows="4" name="descricao" cols="5" class="form-control" id="descricao" placeholder="Descrição"></textarea>
                         </div>
 
-                        <div class="form-group">
-                            <label for="titulo">Tipo</label>
-                            <input type="text" name="tipo" class="form-control" id="tipo" placeholder="Tipo">
-                        </div>
-
+                 
                     </div>
                     <div class="modal-footer">
                         <div>
