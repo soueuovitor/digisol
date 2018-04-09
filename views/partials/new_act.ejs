@@ -1,31 +1,36 @@
-<div class="modal fade" id="iniciar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-    <div class="modal-dialog">
-        <div class="modal-content">
+<div class="modal fade" id="iniciar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
 
-            <div class="modal-header" align="center">
+      <div class="modal-header" align="center">
 
 
 
 
+      </div>
+
+
+
+
+
+      <!-- Begin # DIV Form -->
+      <div id="div-forms">
+
+
+        <!-- Begin | Register Form -->
+        <form id="register-vol">
+
+          <div class="modal-body">
+
+            <div id="div-voluntario-msg">
+              <center>
+                <span id="text-voluntario-msg">Nova Atividade</span>
+              </center>
             </div>
 
-            <!-- Begin # DIV Form -->
-            <div id="div-forms">
-
-
-                <!-- Begin | Register Form -->
-                <form id="register-vol">
-
-                    <div class="modal-body">
-
-                        <div id="div-voluntario-msg">
-                            <center>
-                                <span id="text-voluntario-msg">Nova Atividade</span>
-                            </center>
-                        </div>
-
-                        <div class="form-group">
-                            <select class="form-control button" id="sortPrice" style="float:right">
+            <div class="form-group">
+              <select class="form-control button" id="sortPrice" style="float:right">
                                 <option>Cliente</option>
                                 <% for (var c of clients) { %>
                                     <option value="<%= c.id_cliente %>">
@@ -34,11 +39,11 @@
                                     <%}%>
                             </select>
 
-                        </div>
+            </div>
 
 
-                        <div class="form-group">
-                            <select class="form-control button" id="sortPrice" style="float:right">
+            <div class="form-group">
+              <select class="form-control button" id="sortPrice" style="float:left">
                                 <option>users</option>
                                 <% for (var u of users) { %>
                                     <option value="<%= u.id_utilizador %>">
@@ -47,62 +52,77 @@
                                     <%}%>
                             </select>
 
-                        </div>
-
-
-
-
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Email address</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                        </div>
-
-
-                    </div>
-                    <div class="modal-footer">
-                        <div>
-                            <button type="submit" class="btn btn-primary btn-lg btn-block">Registar</button>
-                        </div>
-                    </div>
-                </form>
-
             </div>
-        </div>
+
+
+
+
+            <div class="form-group">
+              <label for="exampleInputEmail1">Email address</label>
+              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                placeholder="Enter email">
+              <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+
+
+          </div>
+          <div class="modal-footer">
+            <div>
+              <button type="submit" class="btn btn-primary btn-lg btn-block">Registar</button>
+            </div>
+          </div>
+        </form>
+
+      </div>
     </div>
+  </div>
 
 
 
 </div>
 
-<div class="modal fade" id="new-to-do" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-    <div class="modal-dialog">
-        <div class="modal-content">
+<div class="modal fade" id="new-to-do" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
 
-            <div class="modal-header" align="center">
+      <div class="modal-header" align="center">
 
 
 
 
+      </div>
+
+      <!-- Begin # DIV Form -->
+      <div id="div-forms">
+
+
+        <!-- Begin | Register Form -->
+        <form id="new-todo">
+
+          <div class="modal-body">
+
+            <div id="div-voluntario-msg">
+              <center>
+                <span id="text-voluntario-msg">Nova Atividade</span>
+              </center>
             </div>
+            <style>
+              #first .form-control {
+                display: inline;
+                max-width: 50%;
+              }
 
-            <!-- Begin # DIV Form -->
-            <div id="div-forms">
+              .holder {
+                height: fit-content;
+                margin-top: 10px;
+                margin-bottom: 10px;
+              }
+            </style>
 
-
-                <!-- Begin | Register Form -->
-                <form id="new-todo">
-
-                    <div class="modal-body">
-
-                        <div id="div-voluntario-msg">
-                            <center>
-                                <span id="text-voluntario-msg">Nova Atividade</span>
-                            </center>
-                        </div>
-
-                        <div class="form-group">
-                            <select class="form-control button" id="client" name="cliente" style="float:right">
+            <div id="first" class="holder">
+              <div class="form-group">
+                <select class="form-control button" id="client" name="cliente" style="float:right">
                                 <option>Cliente</option>
                                 <% for (var c of clients) { %>
                                     <option value="<%= c.id_cliente %>">
@@ -111,11 +131,10 @@
                                     <%}%>
                             </select>
 
-                        </div>
+              </div>
 
-
-                        <div class="form-group">
-                            <select class="form-control button" id="user" name="user" style="float:right">
+              <div class="form-group">
+                <select class="form-control button" id="user" name="user" style="float:left">
                                 <option>users</option>
                                 <% for (var u of users) { %>
                                     <option value="<%= u.id_utilizador %>">
@@ -124,10 +143,14 @@
                                     <%}%>
                             </select>
 
-                        </div>
+              </div>
+            </div>
 
-                        <div class="form-group">
-                            <select class="form-control button" id="tipo" name="tipo" style="float:right">
+
+
+
+            <div class="form-group">
+              <select class="form-control button" id="tipo" name="tipo" style="float:right">
                                 <option>Tipo</option>
                                 <% for (var t of tipos) { %>
                                     <option value="<%= t.nome %>">
@@ -136,38 +159,39 @@
                                     <%}%>
                             </select>
 
-                        </div>
-
-
-
-
-                        <div class="form-group">
-                            <label for="titulo">Sub-tipo</label>
-                            <input type="text" name="subtipo" class="form-control" id="subtipo" placeholder="Sub-tipo">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="titulo">Título</label>
-                            <input type="text" name="titulo" class="form-control" id="titulo" placeholder="Título">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="titulo">Descrição</label>
-                            <textarea rows="4" name="descricao" cols="5" class="form-control" id="descricao" placeholder="Descrição"></textarea>
-                        </div>
-
-                 
-                    </div>
-                    <div class="modal-footer">
-                        <div>
-                            <button type="submit" class="btn btn-primary btn-lg btn-block">Registar</button>
-                        </div>
-                    </div>
-                </form>
-
             </div>
-        </div>
+
+
+
+
+            <div class="form-group">
+              <label for="titulo">Sub-tipo</label>
+              <input type="text" name="subtipo" class="form-control" id="subtipo" placeholder="Sub-tipo">
+            </div>
+
+            <div class="form-group">
+              <label for="titulo">Título</label>
+              <input type="text" name="titulo" class="form-control" id="titulo" placeholder="Título">
+            </div>
+
+            <div class="form-group">
+              <label for="titulo">Descrição</label>
+              <textarea rows="4" name="descricao" cols="5" class="form-control" id="descricao"
+                placeholder="Descrição"></textarea>
+            </div>
+
+
+          </div>
+          <div class="modal-footer">
+            <div>
+              <button type="submit" class="btn btn-primary btn-lg btn-block">Registar</button>
+            </div>
+          </div>
+        </form>
+
+      </div>
     </div>
+  </div>
 
 
 

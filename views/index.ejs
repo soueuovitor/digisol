@@ -93,7 +93,9 @@
 
 	
  var data = new google.visualization.DataTable();
-      data.addColumn('string', 'Time of Day');
+
+      data.addColumn('number', 'Mês');
+      data.addColumn('string', 'Funcionário');
       data.addColumn('timeofday', 'Horas Diárias');
 
       data.addColumn('timeofday', 'Horas Reais');
@@ -101,7 +103,7 @@ data.addRows([
 
 	  <% for (var e of graphUsers){ %>
 		
-		["<%= e.user %>", [<%= e.horas %>],[ <%= e.reais %>]] ,
+		[<%= e.mes %>, "<%= e.user %>", [<%= e.horas %>],[ <%= e.reais %>]] ,
 	<% } %>
 ]);
 

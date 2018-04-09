@@ -82,6 +82,7 @@
 
                         </a>
                     </h4>
+			<h6 id="<%= a.id_actividade%>watchuser"> <%= a.id_utilizador %> </h6>
                   </div>
 
                   <br>
@@ -154,7 +155,8 @@
       function stop(id, startTime) {
       
         var end = new Date().toISOString().slice(0, 19).replace('T', ' ');
-
+	var user = $('#'+id+'user').text();
+	window.alert(user);
         $('#' + id).replaceWith('<a class="btn btn-box-tool" id="' + id +
           '"onclick="start(id)"><i class="fas fa-play fa-lg" aria-hidden="true"></i></a>')
 
@@ -164,7 +166,9 @@
         $.post("activities/increment", {
           id: id,
           start: startTime,
-          end: end
+          user : user, 
+	   
+	  end: end
         });
       }
 
@@ -184,7 +188,6 @@
 
         $.post("activities/restart", {
           id: data
-
         });
       }
 
