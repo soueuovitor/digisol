@@ -10,7 +10,7 @@
 
       </div>
 
-
+      
 
 
 
@@ -30,9 +30,10 @@
             </div>
 
             <div class="form-group">
+
               <select class="form-control button" id="sortPrice" style="float:right">
                                 <option>Cliente</option>
-                                <% for (var c of clients) { %>
+                  <% for (var c of clients) { %>
                                     <option value="<%= c.id_cliente %>">
                                         <%= c.nome_cliente%>
                                     </option>
@@ -111,10 +112,11 @@
               #first .form-control {
                 display: inline;
                 max-width: 50%;
+                padding-bottom: 10px;
               }
 
               .holder {
-                height: fit-content;
+                min-height: 100%;
                 margin-top: 10px;
                 margin-bottom: 10px;
               }

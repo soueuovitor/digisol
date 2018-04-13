@@ -3,11 +3,11 @@ if &cp | set nocp | endif
 let s:cpo_save=&cpo
 set cpo&vim
 inoremap <silent> <C-Tab> =UltiSnips#ListSnippets()
+map! <F2>  :w 
 snoremap <silent>  c
 xnoremap <silent> 	 :call UltiSnips#SaveLastVisualSelection()gvs
 snoremap <silent> 	 :call UltiSnips#ExpandSnippet()
 noremap <NL> :  tabprevious 
-noremap  :  tabnext 
 map <silent>  : NERDTreeToggle
 snoremap  "_c
 noremap  : tabnew
@@ -47,7 +47,6 @@ cnoremap   : tabclose
 inoremap  :tabclose
 let &cpo=s:cpo_save
 unlet s:cpo_save
-set background=dark
 set backspace=indent,eol,start
 set clipboard=unnamed
 set fileencodings=ucs-bom,utf-8,default,latin1
@@ -67,7 +66,8 @@ if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +33 views/partials/new_act.ejs
+badd +3 controllers/activities.route.js
+badd +0 views/partials/new_act.ejs
 argglobal
 silent! argdel *
 edit views/partials/new_act.ejs
@@ -80,7 +80,7 @@ argglobal
 noremap <buffer>  : call HtmlBeautify() 
 setlocal keymap=
 setlocal noarabic
-setlocal autoindent
+setlocal noautoindent
 setlocal backupcopy=
 setlocal balloonexpr=
 setlocal nobinary
@@ -149,7 +149,8 @@ setlocal matchpairs=(:),{:},[:],<:>
 setlocal modeline
 setlocal modifiable
 setlocal nrformats=bin,octal,hex
-setlocal nonumber
+set number
+setlocal number
 setlocal numberwidth=4
 setlocal omnifunc=htmlcomplete#CompleteTags
 setlocal path=
@@ -192,12 +193,12 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 33 - ((18 * winheight(0) + 14) / 29)
+let s:l = 40 - ((28 * winheight(0) + 14) / 29)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-33
-normal! 019|
+40
+normal! 0
 tabnext 1
 if exists('s:wipebuf') && s:wipebuf != bufnr('%')
   silent exe 'bwipe ' . s:wipebuf
