@@ -64,7 +64,6 @@ router.get('/', function(request, response) {
 
                   if (mes == h2.mes && semana == h2.semana && h.id != h2.id && h2.id_utilizador == id_user) {
 
-
                     duracao = addTimes(duracao, h2.duracao_sessao);
                     console.log('fds estou aqui' + duracao);
                   }

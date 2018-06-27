@@ -5,7 +5,6 @@
     <style>
       .to-do-card {
         background-color: #eeeeef;
-
       }
     </style>
     <div id="floating-button" data-toggle="modal" data-target="#login-modal" data-original-title="Create">
@@ -20,7 +19,8 @@
 
 
           <!-- DONUT CHART -->
-          <div class="box box-act" id="todo" style=" overflow:hidden" ondrop="drop(event)" ondragover="allowDrop(event)">
+          <div class="box box-act" id="todo" style=" overflow:hidden" ondrop="drop(event)"
+            ondragover="allowDrop(event)">
             <div class="box-header">
               <h3 class="box-title">To-Do</h3>
 
@@ -34,7 +34,8 @@
             </div>
             <%for (var a of activities) { %>
               <% if (a.hora_inicio == '0000-00-00 00:00:00') { %>
-                <div class="to-do-card box-todo " id="<%= a.id_actividade %>" draggable="true" ondragstart="drag(event)">
+                <div class="to-do-card box-todo " id="<%= a.id_actividade %>" draggable="true"
+                  ondragstart="drag(event)">
                   <div class="header">
 
                     <h4 class="todo-title">
@@ -55,7 +56,8 @@
 
 
           <!-- DONUT CHART -->
-          <div class="box box-act" style=" overflow:hidden" id="iniciado" ondrop="dropInicio(event)" ondragover="allowDrop(event)">
+          <div class="box box-act" style=" overflow:hidden" id="iniciado" ondrop="dropInicio(event)"
+            ondragover="allowDrop(event)">
             <div class="box-header">
               <h3 class="box-title">Iniciado</h3>
 
@@ -71,7 +73,8 @@
             </div>
             <%for (var a of activities) { %>
               <% if (a.hora_inicio != '0000-00-00 00:00:00' && a.hora_fim == '0000-00-00 00:00:00')  { %>
-                <div class="to-do-card box-todo " id="<%= a.id_actividade %>" draggable="true" ondragstart="drag(event)">
+                <div class="to-do-card box-todo " id="<%= a.id_actividade %>" draggable="true"
+                  ondragstart="drag(event)">
                   <div class="header">
 
                     <h4 class="todo-title">
@@ -82,7 +85,9 @@
 
                         </a>
                     </h4>
-			<h6 id="<%= a.id_actividade%>watchuser"> <%= a.id_utilizador %> </h6>
+                    <h6 id="<%= a.id_actividade%>watchuser">
+                      <%= a.id_utilizador %>
+                    </h6>
                   </div>
 
                   <br>
@@ -103,7 +108,8 @@
 
 
           <!-- DONUT CHART -->
-          <div class="box box-act" id="acabado" style="overflow:hidden" ondrop="dropFim(event,'<%= a.hora_inicio %>')" ondragover="allowDrop(event)">
+          <div class="box box-act" id="acabado" style="overflow:hidden" ondrop="dropFim(event,'<%= a.hora_inicio %>')"
+            ondragover="allowDrop(event)">
             <div class="box-header">
               <h3 class="box-title">Acabado</h3>
 
@@ -117,7 +123,8 @@
             </div>
             <%for (var a of activities) { %>
               <% if (a.hora_inicio != '0000-00-00 00:00:00' && a.hora_fim != '0000-00-00 00:00:00')  { %>
-                <div class="to-do-card box-todo " id="<%= a.id_actividade %>" draggable="true" ondragstart="drag(event)">
+                <div class="to-do-card box-todo " id="<%= a.id_actividade %>" draggable="true"
+                  ondragstart="drag(event)">
                   <h4 class="todo-title">
                     <%= a.nome_actividade %>
                   </h4>
@@ -139,59 +146,85 @@
       </div>
     </div>
     <script>
-      function start(id) {
+
+
+	    window.setInterval(function(){    
+refresh();
+}, 5000);
+
+
+       function refresh()
+      {
+	      $('#todo').load('/activities #todo  > *');
+
+	      $('#iniciado').load('/activities #iniciado  > *');
+       
+      }
+
+     function start(id)
+      {
 
         var start = new Date().toISOString().slice(0, 19).replace('T', ' ');
 
-        $('#' + id).replaceWith('<a class="btn btn-box-tool" id="' + id+
-          '"onclick="stop('+"'"+id+"'"+","+"'"+start+"'"+')"><i class="fas fa-stop fa-lg" aria-hidden="true"></i></a>')
+        $('#' + id).replaceWith('<a class="btn btn-box-tool" id="' + id +
+          '"onclick="stop(' + "'" + id + "'" + "," + "'" + start + "'" +
+          ')"><i class="fas fa-stop fa-lg" aria-hidden="true"></i></a>')
 
-      
+
 
         return start;
 
       }
 
-      function stop(id, startTime) {
-      
+      function stop(id, startTime)
+      {
+
         var end = new Date().toISOString().slice(0, 19).replace('T', ' ');
-	var user = $('#'+id+'user').text();
-	window.alert(user);
+        var user = $('#' + id + 'user').text();
+        window.alert(user);
         $('#' + id).replaceWith('<a class="btn btn-box-tool" id="' + id +
-          '"onclick="start(id)"><i class="fas fa-play fa-lg" aria-hidden="true"></i></a>')
+          '"onclick="start(id)"><i class="fas fa-play fa-lg" aria-hidden="true"></i></a>'
+        )
 
 
 
 
-        $.post("activities/increment", {
+        $.post("activities/increment",
+        {
           id: id,
           start: startTime,
-          user : user, 
-	   
-	  end: end
+          user: user,
+
+          end: end
         });
       }
 
 
-      function allowDrop(ev) {
+      function allowDrop(ev)
+      {
         ev.preventDefault();
       }
 
-      function drag(ev) {
+      function drag(ev)
+      {
         ev.dataTransfer.setData("text", ev.target.id);
       }
 
-      function drop(ev) {
+      function drop(ev)
+      {
         ev.preventDefault();
         var data = ev.dataTransfer.getData("text");
         ev.target.appendChild(document.getElementById(data));
 
-        $.post("activities/restart", {
+        $.post("activities/restart",
+        {
           id: data
         });
+refresh()
       }
 
-      function dropInicio(ev) {
+      function dropInicio(ev)
+      {
         ev.preventDefault();
         var data = ev.dataTransfer.getData("text");
         var droped = document.getElementById(data);
@@ -204,13 +237,17 @@
         ev.target.appendChild(document.getElementById(data));
 
 
-        $.post("activities/inicio", {
+        $.post("activities/inicio",
+        {
           id: data,
           time: d
         });
+
+refresh();
       }
 
-      function dropFim(ev, horaInicio) {
+      function dropFim(ev, horaInicio)
+      {
         ev.preventDefault();
         var data = ev.dataTransfer.getData("text");
 
@@ -218,12 +255,16 @@
         var d = new Date().toISOString().slice(0, 19).replace('T', ' ');
 
 
-        $.post("activities/fim", {
+        $.post("activities/fim",
+        {
           id: data,
           timeEnd: d,
           timeStart: horaInicio
 
         });
+
+refresh();
       }
+	
     </script>
     <% include partials/footer.ejs %>

@@ -1,16 +1,24 @@
+<script>
+  function start()
+  {
+    $('[data-toggle="datepicker"]').datepicker();
+  }
+  window.onload = start();
+</script>
+
 <div class="modal fade" id="iniciar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
   aria-hidden="true" style="display: none;">
   <div class="modal-dialog">
     <div class="modal-content">
 
-      <div class="modal-header" align="center">
+      <div class="modal-header">
 
 
 
 
       </div>
 
-      
+
 
 
 
@@ -87,7 +95,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
 
-      <div class="modal-header" align="center">
+      <div class="modal-header">
 
 
 
@@ -105,13 +113,21 @@
 
             <div id="div-voluntario-msg">
               <center>
-                <span id="text-voluntario-msg">Nova Atividade</span>
+                <span id="text-voluntario-msg">Nova Tarefa</span>
               </center>
             </div>
             <style>
-              #first .form-control {
-                display: inline;
-                max-width: 50%;
+              label {
+                color:black;
+                display: block;
+                float: left;
+              }
+
+              .holder .form-group {
+                display: inline-flex;
+                width: 50%;
+                padding-right: 5px;
+                padding-left: 5px;
                 padding-bottom: 10px;
               }
 
@@ -121,72 +137,73 @@
                 margin-bottom: 10px;
               }
             </style>
+            <div class="form-group">
+              <input type="text" name="titulo" class="form-control" id="titulo" placeholder="Nome da Atividade">
+            </div>
+
 
             <div id="first" class="holder">
-              <div class="form-group">
-                <select class="form-control button" id="client" name="cliente" style="float:right">
-                                <option>Cliente</option>
-                                <% for (var c of clients) { %>
-                                    <option value="<%= c.id_cliente %>">
-                                        <%= c.nome_cliente%>
-                                    </option>
-                                    <%}%>
-                            </select>
+              <div class="form-group" style="float:right">
+                <select class="form-control button" id="client" name="cliente">
+					<option>Cliente</option>
+					<% for (var c of clients) { %>
+					    <option value="<%= c.id_cliente %>">
+						<%= c.nome_cliente%>
+					    </option>
+					    <%}%>
+				    </select>
 
               </div>
 
-              <div class="form-group">
+              <div class="form-group" style="float:left">
                 <select class="form-control button" id="user" name="user" style="float:left">
-                                <option>users</option>
-                                <% for (var u of users) { %>
-                                    <option value="<%= u.id_utilizador %>">
-                                        <%= u.nome_utilizador %>
-                                    </option>
-                                    <%}%>
-                            </select>
+					<option>users</option>
+					<% for (var u of users) { %>
+					    <option value="<%= u.id_utilizador %>">
+						<%= u.nome_utilizador %>
+					    </option>
+					    <%}%>
+				    </select>
 
               </div>
             </div>
 
 
+            <div class="holder">
+
+              <div class="form-group" style="float:left">
+                <select class="form-control button" id="tipo" name="tipo">
+					<option>Tipo</option>
+					<% for (var t of tipos) { %>
+					    <option value="<%= t.nome %>">
+						<%= t.nome %>
+					    </option>
+					    <%}%>
+				    </select>
+
+              </div>
 
 
-            <div class="form-group">
-              <select class="form-control button" id="tipo" name="tipo" style="float:right">
-                                <option>Tipo</option>
-                                <% for (var t of tipos) { %>
-                                    <option value="<%= t.nome %>">
-                                        <%= t.nome %>
-                                    </option>
-                                    <%}%>
-                            </select>
+
+
+              <div class="form-group" style="float: right">
+                <input type="text" name="subtipo" class="form-control" id="subtipo" placeholder="Sub-tipo">
+              </div>
+
 
             </div>
-
-
-
-
             <div class="form-group">
-              <label for="titulo">Sub-tipo</label>
-              <input type="text" name="subtipo" class="form-control" id="subtipo" placeholder="Sub-tipo">
-            </div>
-
-            <div class="form-group">
-              <label for="titulo">Título</label>
-              <input type="text" name="titulo" class="form-control" id="titulo" placeholder="Título">
-            </div>
-
-            <div class="form-group">
-              <label for="titulo">Descrição</label>
               <textarea rows="4" name="descricao" cols="5" class="form-control" id="descricao"
-                placeholder="Descrição"></textarea>
+                placeholder="Descrição da Atividade"></textarea>
             </div>
-
-
+            <div class="form-group">
+              <label for="data">Data Limite</label>
+              <input type="date" id="data" name="dataLimite">
+            </div>
           </div>
           <div class="modal-footer">
             <div>
-              <button type="submit" class="btn btn-primary btn-lg btn-block">Registar</button>
+              <button type="submit" class="btn btn-primary btn-lg btn-block">Guardar</button>
             </div>
           </div>
         </form>
@@ -198,4 +215,3 @@
 
 
 </div>
-<!-- End # DIV Form                         start of alter table-->

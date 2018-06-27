@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const model = require('../models/activities.model')
+const model = require('../models/activities.model');
 router.get('/', function(request, response) {
 	//console.log(request.isAuthenticated());
 
@@ -16,10 +16,10 @@ router.get('/', function(request, response) {
 						users: users,
 						activities: activities,
 						tipos: tipos
-					})
-				})
-			})
-		})
+					});
+				});
+			});
+		});
 
 	});
 
@@ -75,7 +75,7 @@ router.post('/increment', function(request, response) {
 		var dayNum = d.getUTCDay() || 7;
 		d.setUTCDate(d.getUTCDate() + 4 - dayNum);
 		var yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
-		return Math.ceil((((d - yearStart) / 86400000) + 1) / 7)
+		return Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
 	};
 	Number.prototype.toTime = function(isSec) {
 		var ms = isSec ? this * 1e3 : this,
@@ -99,8 +99,7 @@ router.post('/increment', function(request, response) {
 			firstWeekday = new Date(year, month, 1).getDay(),
 			lastDateOfMonth = new Date(year, month + 1, 0).getDate(),
 			offsetDate = this.getDate() + firstWeekday - 1,
-			index = 1 // start index at 0 or 1, your choice
-			,
+			index = 1, 
 			weeksInMonth = index + Math.ceil((lastDateOfMonth + firstWeekday - 7) / 7),
 			week = index + Math.floor(offsetDate / 7);
 		if (exact || week < 2 + index) return week;
@@ -117,7 +116,7 @@ router.post('/increment', function(request, response) {
 	var seconds = (horaFim - horaInicio) / 1000;
 
 	console.log(month);
-	var duracao = (seconds.toTime(true))
+	var duracao = (seconds.toTime(true));
 	console.log(duracao);
 
 	var data = {
@@ -187,7 +186,8 @@ router.post('/newToDo', function(request, response) {
 		'titulo': request.body.titulo,
 		'descricao': request.body.descricao,
 		'tipo': request.body.tipo,
-		'sub': request.body.subtipo
+		'sub': request.body.subtipo,
+		'dataLimite': request.body.dataLimite
 	};
 	model.createToDo(data, function() {});
 
@@ -198,6 +198,6 @@ router.post('/newToDo', function(request, response) {
 	});
 
 
-})
+});
 
 module.exports = router;

@@ -1,122 +1,198 @@
 <% include partials/header %>
+  <style>
+    .form-control {
+      display: inline-block;
+      width: 45%;
+	height:30px;
+    }
+  </style>
+  <!-- Page Content -->
+  <div class="content-card">
+    <div class="cards">
 
-    <!-- Page Content -->
-    <div class="content-card">
-      <div class="cards" >
-        <div class="col-md-6">
+      <div class="col-md-6">
 
 
-          <!-- DONUT CHART -->
-          <div class="box box-danger" style="height: 350px ; overflow:hidden">
-            <div class="box-header">
-              <h3 class="box-title">Lucro do Workshop</h3>
+        <!-- DONUT CHART -->
+        <div class="box box-danger" style="height: 350px ; overflow:hidden">
+          <div class="box-header">
+            <h3 class="box-title">Lucro do Workshop</h3>
+	    <div class=holder>
+            <select class="form-control button" id="mesFunc" style="float:left">
+            <option>Mês</option>
+            <% for (var u of graphUsers) { %>
+              <option value="<%= u.mes %>">
+                <%= u.mes %>
+              </option>
+              <%}%>
+                </select>
 
-              <div class="box-tools pull-right">
 
-              </div>
+
+            <select class="form-control button" id="semanaFunc" style="float:right">
+            <option>Semana</option>
+            <% for (var u of graphUsers) { %>
+              <option value="<%= u.semana %>">
+                <%= u.semana %>
+              </option>
+              <%}%>
+                </select>
+
+		</div>
+
+            <div class="box-tools pull-right">
+
             </div>
-
-            <div id='columnchart_material' style="height: 95%"></div>
           </div>
-          <!-- /.box-body -->
+
+          <div id='columnchart_material' style="height: 88%"></div>
         </div>
-
-        <div class="col-md-6">
-
-
-          <!-- DONUT CHART -->
-          <div class="box box-danger" style="height: 350px ; overflow:hidden">
-            <div class="box-header">
-              <h3 class="box-title">Lucro do Workshop</h3>
-
-              <div class="box-tools pull-right">
-
-              </div>
-            </div>
-
-            <canvas id="donut-lucro"></canvas>
-          </div>
-          <!-- /.box-body -->
-        </div>
-        <div class="col-md-6">
-
-
-          <!-- DONUT CHART -->
-          <div class="box box-danger" style="height: 350px ; overflow:hidden">
-            <div class="box-header">
-              <h3 class="box-title">Lucro do Workshop</h3>
-
-              <div class="box-tools pull-right">
-
-              </div>
-            </div>
-
-            <div id='columnchart_material'></div>
-          </div>
-          <!-- /.box-body -->
-        </div>
-
-        <div class="col-md-6">
-
-
-          <!-- DONUT CHART -->
-          <div class="box box-danger" style="height: 350px ; overflow:hidden">
-            <div class="box-header">
-              <h3 class="box-title">Lucro do Workshop</h3>
-
-              <div class="box-tools pull-right">
-
-              </div>
-            </div>
-
-            <canvas id="donut-lucro"></canvas>
-          </div>
-          <!-- /.box-body -->
-        </div>
-
-
+        <!-- /.box-body -->
       </div>
+
+
+
+      <div class="col-md-6">
+
+
+        <!-- DONUT CHART -->
+        <div class="box box-danger" style="height: 350px ; overflow:hidden">
+          <div class="box-header">
+            <h3 class="box-title">Lucro do Workshop</h3>
+
+            <div class="box-tools pull-right">
+
+            </div>
+          </div>
+
+
+
+          <% for (var e of graphUsers) { %>
+
+            <div class="progress">
+              <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="<%= e.horas %>"
+                aria-valuemin="0" aria-valuemax="<%= e.mes %>" style="width:40%">
+                40%
+              </div>
+            </div>
+
+
+
+            <% } %>
+
+        </div>
+        <!-- /.box-body -->
+      </div>
+
+      <div class="col-md-6">
+
+
+        <!-- DONUT CHART -->
+        <div class="box box-danger" style="height: 350px ; overflow:hidden">
+          <div class="box-header">
+            <h3 class="box-title">Lucro do Workshop</h3>
+
+            <div class="box-tools pull-right">
+
+            </div>
+          </div>
+
+          <canvas id="donut-lucro"></canvas>
+        </div>
+        <!-- /.box-body -->
+      </div>
+      <div class="col-md-6">
+
+
+        <!-- DONUT CHART -->
+        <div class="box box-danger" style="height: 350px ; overflow:hidden">
+          <div class="box-header">
+            <h3 class="box-title">Lucro do Workshop</h3>
+
+            <div class="box-tools pull-right">
+
+            </div>
+          </div>
+
+          <div id='columnchart_material'></div>
+        </div>
+        <!-- /.box-body -->
+      </div>
+
+      <div class="col-md-6">
+
+
+        <!-- DONUT CHART -->
+        <div class="box box-danger" style="height: 350px ; overflow:hidden">
+          <div class="box-header">
+            <h3 class="box-title">Lucro do Workshop</h3>
+
+            <div class="box-tools pull-right">
+
+            </div>
+          </div>
+
+          <canvas id="donut-lucro"></canvas>
+        </div>
+        <!-- /.box-body -->
+      </div>
+
+
     </div>
+  </div>
 
 
-    <script>
-
-
-  
-
- google.charts.load('current', {'packages':['bar']});
-      google.charts.setOnLoadCallback(drawChart);
-
-
-
-      function drawChart() {
-
+  <script>
 	
- var data = new google.visualization.DataTable();
+    <% function returnMes()
+   { %>
+    var mes = $('#mesFunc').val();
+    return mes;
+    window.alert(mes);
+    <% }%>
+    google.charts.load('current',
+    {
+      'packages': ['bar']
+    });
+    google.charts.setOnLoadCallback(drawChart);
 
-      data.addColumn('number', 'Mês');
+
+
+    function drawChart()
+    {
+
+      var data = new google.visualization.DataTable();
       data.addColumn('string', 'Funcionário');
       data.addColumn('timeofday', 'Horas Diárias');
 
       data.addColumn('timeofday', 'Horas Reais');
-data.addRows([
+      data.addRows([
 
-	  <% for (var e of graphUsers){ %>
-		
-		[<%= e.mes %>, "<%= e.user %>", [<%= e.horas %>],[ <%= e.reais %>]] ,
-	<% } %>
-]);
+        <% for (var e of graphUsers){ %>
+			<% if (e.mes ==  4 )   { %>
 
-        var options = {
-          chart: {
-            title: 'Hours Worked by worker',
-          }
-        };
+        ["<%= e.user %>", [<%= e.horas %>],
+          [<%= e.reais %>]
+        ],
 
-        var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+        <%}else{%>
+        <% }%>
 
-        chart.draw(data, google.charts.Bar.convertOptions(options));
-      }
+
+        <% } %>
+      ]);
+
+      var options = {
+        chart:
+        {
+        }
+      };
+
+      var chart = new google.charts.Bar(document.getElementById(
+        'columnchart_material'));
+
+      chart.draw(data, google.charts.Bar.convertOptions(options));
+    }
 
 
 
@@ -134,25 +210,30 @@ data.addRows([
 
 
     var ctx = document.getElementById('donut-lucro').getContext('2d');
-var chart = new Chart(ctx, {
-    // The type of chart we want to create
-    type: 'line',
+    var chart = new Chart(ctx,
+    {
+      // The type of chart we want to create
+      type: 'line',
 
-    // The data for our dataset
-    data: {
-        labels: ["January", "February", "March", "April", "May", "June", "July"],
-        datasets: [{
-            label: "My First dataset",
-            backgroundColor: 'rgb(255, 99, 132)',
-            borderColor: 'rgb(255, 99, 132)',
-            data: [0, 10, 5, 2, 20, 30, 45],
+      // The data for our dataset
+      data:
+      {
+        labels: ["January", "February", "March", "April", "May", "June",
+          "July"
+        ],
+        datasets: [
+        {
+          label: "My First dataset",
+          backgroundColor: 'rgb(255, 99, 132)',
+          borderColor: 'rgb(255, 99, 132)',
+          data: [0, 10, 5, 2, 20, 30, 45],
         }]
-    },
+      },
 
-    // Configuration options go here
-    options: {}
-});
+      // Configuration options go here
+      options:
+      {}
+    });
+  </script>
 
-    </script>
-
-<% include partials/footer.ejs %>
+  <% include partials/footer.ejs %>

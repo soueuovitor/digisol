@@ -11,12 +11,10 @@ var nodemailer = require('nodemailer');
 
 
 
-
 //new
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const passport = require('passport');
-
 
 
 
@@ -37,10 +35,9 @@ global.secure = function (type) {
 			}
 		}
 		response.redirect('/');
-	}
+	};
 };
 //end of 
-
 app.use(validator());
 app.use(bodyParser.json(), bodyParser.urlencoded({
 	extended: true

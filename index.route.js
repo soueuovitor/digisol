@@ -17,7 +17,7 @@ router.get('/', function(request, response) {
 
           function timeToMins(time) {
             var b = time.split(':');
-            return b[0] * 60 + +b[1];
+            return b[0] * 60 + b[1];
           }
 
           // Convert minutes to a time in format hh:mm
